@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Quiz</string>
+    <string name="hint_name">Nom</string>
+    <string name="hint_firstname">Prénom</string>
+    <string name="hint_job">Job/Entreprise</string>
+    <string name="hint_year">Année de naissance</string>
+    <string name="hint_postcode">Code postal</string>
+    <string name="hint_phone">Téléphone</string>
+    <string name="hint_email">Email</string>
+    <string name="label_continue">Continuer</string>
+    <string name="text_form">Complétez le formulaire et répondez au quiz pour tenter de gagner des cadeaux.</string>
+    <string name="validation_empty">Champ obligatoire</string>
+    <string name="text_quiz_about_start">Le quiz va commencer !</string>
+    <string name="validation_email">Email invalide</string>
+    <string name="label_save">Sauvegarde...</string>
+</resources>

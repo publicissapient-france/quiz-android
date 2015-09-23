@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    defaultConfig {
+        applicationId "fr.xebia.quiz"
+        minSdkVersion 19
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            buildConfigField "String", "PARSE_APPLICATION_ID", "\"${quizApplicationId}\""
+            buildConfigField "String", "PARSE_CLIENT_KEY", "\"${quizClientKey}\""
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile(
+            'com.android.support:appcompat-v7:23.0.1',
+            'com.jakewharton.timber:timber:3.1.0',
+            'com.android.support:design:23.0.1',
+            'com.parse.bolts:bolts-android:1.2.1',
+            'com.parse:parse-android:1.10.2',
+            'com.mobsandgeeks:android-saripaar:2.0.2',
+            'com.jakewharton:butterknife:7.0.1'
+    )
+}
