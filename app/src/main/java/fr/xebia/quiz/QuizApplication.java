@@ -7,14 +7,22 @@ import com.parse.ParseObject;
 
 import fr.xebia.quiz.model.Guest;
 import fr.xebia.quiz.model.Question;
+import timber.log.Timber;
 
 public class QuizApplication extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
+        initTimber();
         initParseClasses();
         initParse();
+    }
+
+    private void initTimber() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
     }
 
     private void initParseClasses() {

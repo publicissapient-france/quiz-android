@@ -2,6 +2,7 @@ package fr.xebia.quiz.form;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -25,9 +26,11 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fr.xebia.quiz.BuildConfig;
 import fr.xebia.quiz.R;
 import fr.xebia.quiz.model.Guest;
 import fr.xebia.quiz.model.Question;
+import fr.xebia.quiz.quiz.QuizActivity;
 import timber.log.Timber;
 
 import static fr.xebia.quiz.model.ParseConstant.TABLE_QUESTION;
@@ -104,7 +107,9 @@ public class FormActivity extends Activity implements Validator.ValidationListen
                         public void done(ParseException e) {
                             if (e == null) {
                                 hasToWaitForQuestion = false;
-                                tryQuiz();
+                                if (dialog != null) {
+                                    tryQuiz();
+                                }
                             } else {
                                 Timber.e(e, "Cannot pin question");
                             }
@@ -122,7 +127,7 @@ public class FormActivity extends Activity implements Validator.ValidationListen
             if (dialog != null) {
                 dialog.dismiss();
             }
-            // TODO startQuiz
+            startActivity(new Intent(this, QuizActivity.class));
         } else {
             dialog = ProgressDialog.show(this, null, getString(R.string.dialog_quiz_loading));
         }
@@ -141,7 +146,11 @@ public class FormActivity extends Activity implements Validator.ValidationListen
     @OnClick(R.id.submitButton)
     @SuppressWarnings("unused")
     public void onSubmitButtonClick() {
-        validator.validate();
+        if (BuildConfig.DEBUG) {
+            onValidationSucceeded();
+        } else {
+            validator.validate();
+        }
     }
 
     @Override
