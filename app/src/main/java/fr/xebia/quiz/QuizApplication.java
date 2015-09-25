@@ -6,6 +6,7 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 
 import fr.xebia.quiz.model.Guest;
+import fr.xebia.quiz.model.Question;
 
 public class QuizApplication extends Application {
 
@@ -18,9 +19,11 @@ public class QuizApplication extends Application {
 
     private void initParseClasses() {
         ParseObject.registerSubclass(Guest.class);
+        ParseObject.registerSubclass(Question.class);
     }
 
     private void initParse() {
+        Parse.enableLocalDatastore(this);
         Parse.initialize(this, BuildConfig.PARSE_APPLICATION_ID, BuildConfig.PARSE_CLIENT_KEY);
     }
 }
