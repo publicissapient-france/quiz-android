@@ -1,10 +1,10 @@
 package fr.xebia.quiz.form;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -35,7 +35,7 @@ import timber.log.Timber;
 
 import static fr.xebia.quiz.model.ParseConstant.TABLE_QUESTION;
 
-public class FormActivity extends Activity implements Validator.ValidationListener {
+public class FormActivity extends AppCompatActivity implements Validator.ValidationListener {
 
     public static final Handler HANDLER = new Handler();
 
