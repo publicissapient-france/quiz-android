@@ -27,6 +27,8 @@ import fr.xebia.quiz.model.QuestionResult;
 import fr.xebia.quiz.result.ResultFragment;
 import timber.log.Timber;
 
+import static fr.xebia.quiz.form.FormActivity.EXTRA_GUEST_ID;
+
 public class QuestionFragment extends Fragment {
 
     public static final int QUIZ_QUESTION_COUNT = 10;
@@ -42,6 +44,17 @@ public class QuestionFragment extends Fragment {
 
     private Question[] quizQuestion;
     private int current = 0;
+    private String guestId;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            guestId = bundle.getString(EXTRA_GUEST_ID);
+        }
+    }
 
     @Nullable
     @Override
@@ -132,7 +145,7 @@ public class QuestionFragment extends Fragment {
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container, ResultFragment.newInstance(results), ResultFragment.class.getSimpleName())
+                .replace(R.id.container, ResultFragment.newInstance(guestId, results), ResultFragment.class.getSimpleName())
                 .commit();
     }
 
@@ -150,5 +163,13 @@ public class QuestionFragment extends Fragment {
         answer0Text.setText(answers.get(0));
         answer1Text.setText(answers.get(1));
         answer2Text.setText(answers.get(2));
+    }
+
+    public static Fragment newInstance(String guestId) {
+        QuestionFragment fragment = new QuestionFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(EXTRA_GUEST_ID, guestId);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 }

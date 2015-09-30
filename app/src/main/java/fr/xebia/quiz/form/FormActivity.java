@@ -1,7 +1,6 @@
 package fr.xebia.quiz.form;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -37,7 +36,9 @@ import static fr.xebia.quiz.model.ParseConstant.TABLE_QUESTION;
 
 public class FormActivity extends AppCompatActivity implements Validator.ValidationListener {
 
-    public static final Handler HANDLER = new Handler();
+    public static final String EXTRA_GUEST_ID = "EXTRA_GUEST_ID";
+
+    private static final Handler HANDLER = new Handler();
 
     @NotEmpty(messageResId = R.string.validation_empty)
     @Bind(R.id.nameText) EditText nameText;
@@ -60,13 +61,8 @@ public class FormActivity extends AppCompatActivity implements Validator.Validat
     private boolean hasToWaitForQuestion = true;
     private Validator validator;
     private ProgressDialog dialog;
-
-    private final Runnable startQuiz = new Runnable() {
-        @Override
-        public void run() {
-            tryQuiz();
-        }
-    };
+    private Guest guest;
+    private String guestId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +123,7 @@ public class FormActivity extends AppCompatActivity implements Validator.Validat
             if (dialog != null) {
                 dialog.dismiss();
             }
-            startActivity(new Intent(this, QuizActivity.class));
+            startActivity(QuizActivity.newInstance(this, guestId));
         } else {
             dialog = ProgressDialog.show(this, null, getString(R.string.dialog_quiz_loading));
         }
@@ -155,7 +151,7 @@ public class FormActivity extends AppCompatActivity implements Validator.Validat
 
     @Override
     public void onValidationSucceeded() {
-        Guest guest = new Guest();
+        final Guest guest = new Guest();
         guest.setName(nameText.getText().toString());
         guest.setFirstname(firstnameText.getText().toString());
         guest.setEmail(emailText.getText().toString());
@@ -178,7 +174,13 @@ public class FormActivity extends AppCompatActivity implements Validator.Validat
                     return;
                 }
                 Toast.makeText(activity, R.string.text_quiz_about_start, Toast.LENGTH_SHORT).show();
-                HANDLER.postDelayed(startQuiz, Toast.LENGTH_SHORT);
+                HANDLER.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        FormActivity.this.guestId = guest.getObjectId();
+                        tryQuiz();
+                    }
+                }, Toast.LENGTH_SHORT);
             }
         });
     }

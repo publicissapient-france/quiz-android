@@ -16,5 +16,6 @@ public class ParseConstant {
     public static final String CORRECT = "correct";
     public static final String WRONG1 = "wrong1";
     public static final String WRONG2 = "wrong2";
+    public static final String SCORE = "score";
 
 }

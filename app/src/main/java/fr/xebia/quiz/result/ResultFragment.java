@@ -9,22 +9,33 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import fr.xebia.quiz.R;
-import fr.xebia.quiz.shared.Adapter;
+import fr.xebia.quiz.model.Guest;
 import fr.xebia.quiz.model.QuestionResult;
+import fr.xebia.quiz.shared.Adapter;
 import fr.xebia.quiz.shared.ItemView;
+import timber.log.Timber;
+
+import static fr.xebia.quiz.form.FormActivity.EXTRA_GUEST_ID;
 
 public class ResultFragment extends Fragment {
 
-    public static final String ARG_RESULTS = "ARG_RESULTS";
+    public static final String EXTRA_RESULTS = "EXTRA_RESULTS";
+    public static final String SCORE_FORMAT = "%d/%d";
 
     @Bind(R.id.resultListView) ListView resultListView;
     @Bind(R.id.scoreText) TextView scoreText;
 
     private Adapter<QuestionResult, ItemView<QuestionResult>> adapter;
     private QuestionResult[] results;
+    private String guestId;
+    private int score;
 
     @Nullable
     @Override
@@ -34,10 +45,11 @@ public class ResultFragment extends Fragment {
         return view;
     }
 
-    public static Fragment newInstance(QuestionResult[] results) {
+    public static Fragment newInstance(String guestId, QuestionResult[] results) {
         ResultFragment fragment = new ResultFragment();
         Bundle arguments = new Bundle();
-        arguments.putParcelableArray(ARG_RESULTS, results);
+        arguments.putParcelableArray(EXTRA_RESULTS, results);
+        arguments.putString(EXTRA_GUEST_ID, guestId);
         fragment.setArguments(arguments);
         return fragment;
     }
@@ -48,18 +60,34 @@ public class ResultFragment extends Fragment {
 
         Bundle arguments = getArguments();
         if (arguments != null) {
-            results = (QuestionResult[]) arguments.getParcelableArray(ARG_RESULTS);
+            results = (QuestionResult[]) arguments.getParcelableArray(EXTRA_RESULTS);
+            guestId = arguments.getString(EXTRA_GUEST_ID);
         } else {
+            guestId = "";
             results = new QuestionResult[0];
         }
         adapter = new Adapter<>(getActivity(), results, R.layout.view_result_item);
+        score = getScore();
+
+        ParseQuery<Guest> query = new ParseQuery<>(Guest.class);
+        query.getInBackground(guestId, new GetCallback<Guest>() {
+            @Override
+            public void done(Guest guest, ParseException e) {
+                if (e == null) {
+                    guest.setScore(String.format(SCORE_FORMAT, score, results.length));
+                    guest.saveInBackground();
+                } else {
+                    Timber.e(e, "Cannot retrieve guest");
+                }
+            }
+        });
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         resultListView.setAdapter(adapter);
-        scoreText.setText(String.format("%d/%d", getScore(), results.length));
+        scoreText.setText(String.format("%d/%d", score, results.length));
     }
 
     public int getScore() {
