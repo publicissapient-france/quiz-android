@@ -2,11 +2,11 @@ package fr.xebia.quiz.shared;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
+import android.widget.LinearLayout;
 
 import butterknife.ButterKnife;
 
-public abstract class ItemView<T> extends View {
+public abstract class ItemView<T> extends LinearLayout {
 
     public ItemView(Context context) {
         this(context, null);
