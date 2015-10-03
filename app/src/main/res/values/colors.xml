@@ -5,6 +5,9 @@
     <color name="accent">#b56caa</color>
     <color name="white">#f1f1f1</color>
     <color name="grey">#eaeaea</color>
+    <color name="grey1">#d1d1d1</color>
     <color name="black">#2b2b2b</color>
     <color name="grey0">#d6d6d6</color>
+    <color name="green">#89c541</color>
+    <color name="grey2">#6e6e6e</color>
 </resources>

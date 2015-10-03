@@ -12,7 +12,7 @@
     <string name="validation_empty">Champ obligatoire</string>
     <string name="text_quiz_about_start">Le quiz va commencer !</string>
     <string name="validation_email">Email invalide</string>
-    <string name="label_save">Sauvegarde...</string>
-    <string name="dialog_quiz_loading">Loading quiz...</string>
+    <string name="label_save">Sauvegarde…</string>
+    <string name="dialog_quiz_loading">Loading quiz…</string>
     <string name="title_quiz">Xebia Quiz</string>
 </resources>
