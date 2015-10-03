@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -40,6 +41,8 @@ public class FormActivity extends AppCompatActivity implements Validator.Validat
 
     private static final Handler HANDLER = new Handler();
 
+    @Bind(R.id.toolbar) Toolbar toolbar;
+
     @NotEmpty(messageResId = R.string.validation_empty)
     @Bind(R.id.nameText) EditText nameText;
 
@@ -61,7 +64,6 @@ public class FormActivity extends AppCompatActivity implements Validator.Validat
     private boolean hasToWaitForQuestion = true;
     private Validator validator;
     private ProgressDialog dialog;
-    private Guest guest;
     private String guestId;
 
     @Override
@@ -71,10 +73,13 @@ public class FormActivity extends AppCompatActivity implements Validator.Validat
 
         ButterKnife.bind(this);
 
+        setSupportActionBar(toolbar);
+
         validator = new Validator(this);
         validator.setValidationListener(this);
 
         syncQuestion();
+
     }
 
     private void syncQuestion() {

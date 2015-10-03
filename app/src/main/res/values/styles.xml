@@ -1,9 +1,39 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="android:textSize">16sp</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="colorButtonNormal">@color/white</item>
+        <item name="android:windowBackground">@color/grey</item>
+    </style>
+
+    <style name="AppTheme.ToolbarTitle">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="AppTheme.SubTitle">
+        <item name="android:textSize">21sp</item>
+    </style>
+
+    <style name="AppTheme.Button">
+        <item name="android:paddingTop">@dimen/margin_medium</item>
+        <item name="android:paddingBottom">@dimen/margin_medium</item>
+        <item name="android:paddingRight">@dimen/margin_medium</item>
+        <item name="android:paddingLeft">@dimen/margin_medium</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="AppTheme.TextInputLayout">
+        <item name="android:background">@drawable/text_input_background</item>
+        <item name="android:paddingBottom">@dimen/margin_medium</item>
+        <item name="android:paddingLeft">@dimen/margin_small</item>
+        <item name="android:paddingRight">@dimen/margin_small</item>
+        <item name="android:paddingTop">@dimen/margin_small</item>
+        <item name="android:textColorHint">@color/black</item>
     </style>
 
 </resources>
