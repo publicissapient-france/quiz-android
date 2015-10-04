@@ -26,6 +26,6 @@ public abstract class ItemView<T> extends LinearLayout {
         ButterKnife.bind(this);
     }
 
-    public abstract void bind(T item);
+    public abstract void bind(int index, T item);
 
 }

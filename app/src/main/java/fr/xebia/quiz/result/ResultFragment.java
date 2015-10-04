@@ -30,6 +30,7 @@ public class ResultFragment extends Fragment {
     public static final String SCORE_FORMAT = "%d/%d";
 
     @Bind(R.id.resultListView) ListView resultListView;
+    @Bind(R.id.scoreTotalText) TextView scoreTotalText;
     @Bind(R.id.scoreText) TextView scoreText;
 
     private Adapter<QuestionResult, ItemView<QuestionResult>> adapter;
@@ -87,7 +88,8 @@ public class ResultFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         resultListView.setAdapter(adapter);
-        scoreText.setText(String.format("%d/%d", score, results.length));
+        scoreTotalText.setText(getContext().getString(R.string.text_score, score, results.length));
+        scoreText.setText(String.valueOf(score));
     }
 
     public int getScore() {

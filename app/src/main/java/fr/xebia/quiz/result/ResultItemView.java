@@ -29,14 +29,15 @@ public class ResultItemView extends ItemView<QuestionResult> {
         super(context, attrs, defStyleAttr);
     }
 
-    public void bind(QuestionResult result) {
+    public void bind(int index, QuestionResult result) {
         if (result.equals(this.result)) {
             return;
         }
         this.result = result;
 
-        questionText.setText(result.question);
-        givenText.setText(result.givenAnswer);
-        correctText.setText(result.correctAnswer);
+        questionText.setText(getContext().getString(R.string.text_question, index, result.question));
+        givenText.setText(getContext().getString(R.string.text_answer, result.givenAnswer));
+        correctText.setText(getContext().getString(R.string.text_answer_correct, result.correctAnswer));
     }
+
 }

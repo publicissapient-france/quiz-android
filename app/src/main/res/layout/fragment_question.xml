@@ -15,7 +15,10 @@
         android:layout_marginLeft="@dimen/margin_small"
         android:layout_marginRight="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_big"
+        android:ellipsize="end"
         android:gravity="center"
+        android:maxLines="4"
+        android:minLines="4"
         tools:text="Quel est le nom de la dernière version d'Android ?"/>
 
     <Button

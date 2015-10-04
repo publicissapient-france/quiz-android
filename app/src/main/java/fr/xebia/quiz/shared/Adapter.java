@@ -42,7 +42,7 @@ public class Adapter<T, U extends ItemView<T>> extends BaseAdapter {
         } else {
             view = (U) inflater.inflate(viewId, parent, false);
         }
-        view.bind(getItem(position));
+        view.bind(position, getItem(position));
         return view;
     }
 }

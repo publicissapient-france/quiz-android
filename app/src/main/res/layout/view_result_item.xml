@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <fr.xebia.quiz.result.ResultItemView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/margin_medium"
+    android:paddingLeft="@dimen/margin_medium"
+    android:paddingRight="@dimen/margin_medium"
+    android:paddingTop="@dimen/margin_medium">
 
     <TextView
         android:id="@+id/questionText"
+        style="@style/AppTheme.TextQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Question?"/>
+        android:text="@string/text_question"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/givenText"
+        style="@style/AppTheme.TextAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Given answer"/>
+        android:text="@string/text_answer"/>
 
     <TextView
         android:id="@+id/correctText"
+        style="@style/AppTheme.TextAnswerCorrect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Correct answer"/>
+        android:text="@string/text_answer_correct"/>
 
 </fr.xebia.quiz.result.ResultItemView>

@@ -15,4 +15,10 @@
     <string name="label_save">Sauvegarde…</string>
     <string name="dialog_quiz_loading">Loading quiz…</string>
     <string name="title_quiz">Xebia Quiz</string>
+    <string name="title_congrats">félicitation</string>
+    <string name="text_pts">pts</string>
+    <string name="text_score">Score de %1$s/%2$s</string>
+    <string name="text_answer">Votre réponse : %1$s</string>
+    <string name="text_answer_correct">Bonne réponse : %1$s</string>
+    <string name="text_question">Q%1$s : %2$s</string>
 </resources>
