@@ -54,11 +54,14 @@
         android:layout_marginTop="@dimen/margin_big">
 
         <ProgressBar
+            android:id="@+id/timerProgressBar"
             style="@style/AppTheme.TimeProgress"
             android:layout_width="match_parent"
-            android:progress="10"/>
+            android:max="1000"
+            android:progress="1000"/>
 
         <TextView
+            android:id="@+id/timerTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -72,11 +75,13 @@
         android:layout_margin="@dimen/margin_small">
 
         <ProgressBar
+            android:id="@+id/questionCountProgressBar"
             style="@style/AppTheme.QuestionProgress"
             android:layout_width="match_parent"
             android:progress="3"/>
 
         <TextView
+            android:id="@+id/questionCountTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
