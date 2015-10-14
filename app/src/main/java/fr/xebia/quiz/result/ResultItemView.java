@@ -35,7 +35,7 @@ public class ResultItemView extends ItemView<QuestionResult> {
         }
         this.result = result;
 
-        questionText.setText(getContext().getString(R.string.text_question, index, result.question));
+        questionText.setText(getContext().getString(R.string.text_question, index + 1, result.question));
         givenText.setText(getContext().getString(R.string.text_answer, result.givenAnswer));
         correctText.setText(getContext().getString(R.string.text_answer_correct, result.correctAnswer));
     }

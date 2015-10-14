@@ -79,7 +79,6 @@ public class FormActivity extends AppCompatActivity implements Validator.Validat
         validator.setValidationListener(this);
 
         syncQuestion();
-
     }
 
     private void syncQuestion() {
