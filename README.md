@@ -1,2 +1,24 @@
-# quiz-android
-Quiz Android application
+# Quiz Android Application
+
+> Quiz can be used during any event because questions and users are stored in Parse.
+
+## Develop
+
+### Android
+
+Define parse configuration
+
+    PARSE_APPLICATION_ID=
+    PARSE_CLIENT_KEY=
+  
+in your **.gradle** file and run application.
+
+> Ask marketing@xebia.fr for Parse credentials.
+
+### Parse Cloud
+
+Go to **cloud/** and run
+
+    parse develop expert-cafe
+
+> Designed on Nexus 7 for DroidCon 2015.
