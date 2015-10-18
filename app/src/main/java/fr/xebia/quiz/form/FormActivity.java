@@ -24,7 +24,6 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 import butterknife.Bind;
@@ -195,29 +194,35 @@ public class FormActivity extends AppCompatActivity implements Validator.Validat
         guest.setYear(yearText.getText().toString());
         guest.setJob(jobText.getText().toString());
 
-        final WeakReference<ProgressDialog> weakProgress = new WeakReference<>(ProgressDialog.show(this, null, getString(R.string.label_save)));
-        final WeakReference<FormActivity> weakActivity = new WeakReference<>(this);
         guest.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                ProgressDialog dialog = weakProgress.get();
                 if (dialog != null) {
                     dialog.dismiss();
                 }
-                FormActivity activity = weakActivity.get();
-                if (activity == null) {
-                    return;
-                }
-                Toast.makeText(activity, R.string.text_quiz_about_start, Toast.LENGTH_SHORT).show();
+                Toast.makeText(FormActivity.this, R.string.text_quiz_about_start, Toast.LENGTH_SHORT).show();
                 HANDLER.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         FormActivity.this.guestId = guest.getObjectId();
+                        resetForm();
                         tryQuiz();
                     }
                 }, Toast.LENGTH_SHORT);
             }
         });
+    }
+
+    private void resetForm() {
+        nameText.setText("");
+        firstnameText.setText("");
+        emailText.setText("");
+        phoneText.setText("");
+        postcodeText.setText("");
+        yearText.setText("");
+        jobText.setText("");
+
+        firstnameText.requestFocus();
     }
 
     @Override
