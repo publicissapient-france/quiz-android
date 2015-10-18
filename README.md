@@ -17,10 +17,20 @@ in your **.gradle** file and run application.
 
 > Ask marketing@xebia.fr for Parse credentials.
 
-### Parse Cloud
+### Web
 
-Go to **cloud/** and run
+Go to javascript/ directory
 
-    parse develop expert-cafe
+    $> npm install
+    $> bower install
+    $> grunt
+    
+## Deploy to gh-pages
+
+    $> grunt deploy
+    
+## Live
+
+Go to [http://xebia-france.github.io/quiz-android/](http://xebia-france.github.io/quiz-android/)
 
 > Designed on Nexus 7 for DroidCon 2015.
