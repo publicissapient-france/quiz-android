@@ -6,7 +6,9 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.ValidationError;
@@ -15,9 +17,11 @@ import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
+import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.lang.ref.WeakReference;
@@ -42,6 +46,8 @@ public class FormActivity extends AppCompatActivity implements Validator.Validat
     private static final Handler HANDLER = new Handler();
 
     @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.formScrollView) ViewGroup formViewGroup;
+    @Bind(R.id.progress) ProgressBar progressBar;
 
     @NotEmpty(messageResId = R.string.validation_empty)
     @Bind(R.id.nameText) EditText nameText;
@@ -78,7 +84,26 @@ public class FormActivity extends AppCompatActivity implements Validator.Validat
         validator = new Validator(this);
         validator.setValidationListener(this);
 
-        syncQuestion();
+        login();
+    }
+
+    private void login() {
+        if (ParseUser.getCurrentUser() == null) {
+            progressBar.setVisibility(View.VISIBLE);
+            formViewGroup.setVisibility(View.GONE);
+            ParseUser.logInInBackground(BuildConfig.PARSE_ADMIN_USERNAME, BuildConfig.PARSE_ADMIN_PASSWORD, new LogInCallback() {
+                @Override
+                public void done(ParseUser user, ParseException e) {
+                    if (e == null) {
+                        syncQuestion();
+                    } else {
+                        Timber.e(e, "Cannot login user");
+                    }
+                }
+            });
+        } else {
+            syncQuestion();
+        }
     }
 
     private void syncQuestion() {
@@ -105,6 +130,8 @@ public class FormActivity extends AppCompatActivity implements Validator.Validat
                     ParseObject.pinAllInBackground(TABLE_QUESTION, questions, new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
+                            progressBar.setVisibility(View.GONE);
+                            formViewGroup.setVisibility(View.VISIBLE);
                             if (e == null) {
                                 hasToWaitForQuestion = false;
                                 if (dialog != null) {
@@ -138,7 +165,11 @@ public class FormActivity extends AppCompatActivity implements Validator.Validat
         query.findInBackground(new FindCallback<Question>() {
             @Override
             public void done(List<Question> questions, ParseException e) {
-                saveQuestion(questions);
+                if (e == null) {
+                    saveQuestion(questions);
+                } else {
+                    Timber.e(e, "Cannot get questions");
+                }
             }
         });
     }

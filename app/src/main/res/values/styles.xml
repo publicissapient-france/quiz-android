@@ -44,13 +44,13 @@
 
     <style name="AppTheme.TimeProgress" parent="android:Widget.ProgressBar.Horizontal">
         <item name="android:indeterminateOnly">false</item>
-        <item name="android:layout_height">@dimen/progress_question_height</item>
+        <item name="android:layout_height">@dimen/progress_size</item>
         <item name="android:progressDrawable">@drawable/time_progress</item>
     </style>
 
     <style name="AppTheme.QuestionProgress">
         <item name="android:indeterminateOnly">false</item>
-        <item name="android:layout_height">@dimen/progress_question_height</item>
+        <item name="android:layout_height">@dimen/progress_size</item>
         <item name="android:progressDrawable">@drawable/question_progress</item>
     </style>
 

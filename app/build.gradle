@@ -30,6 +30,8 @@ android {
             applicationIdSuffix ".debug"
             buildConfigField "String", "PARSE_APPLICATION_ID", "\"${quizApplicationId}\""
             buildConfigField "String", "PARSE_CLIENT_KEY", "\"${quizClientKey}\""
+            buildConfigField "String", "PARSE_ADMIN_USERNAME", "\"${quizAdminUsername}\""
+            buildConfigField "String", "PARSE_ADMIN_PASSWORD", "\"${quizAdminPassword}\""
         }
 
         release {
