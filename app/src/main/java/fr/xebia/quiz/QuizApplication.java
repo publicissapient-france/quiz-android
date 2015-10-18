@@ -7,6 +7,7 @@ import com.parse.ParseObject;
 
 import fr.xebia.quiz.model.Guest;
 import fr.xebia.quiz.model.Question;
+import fr.xebia.quiz.model.Rank;
 import timber.log.Timber;
 
 public class QuizApplication extends Application {
@@ -27,6 +28,7 @@ public class QuizApplication extends Application {
 
     private void initParseClasses() {
         ParseObject.registerSubclass(Guest.class);
+        ParseObject.registerSubclass(Rank.class);
         ParseObject.registerSubclass(Question.class);
     }
 

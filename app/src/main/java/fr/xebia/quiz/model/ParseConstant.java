@@ -4,6 +4,7 @@ public class ParseConstant {
 
     public static final String TABLE_GUEST = "Guest";
     public static final String TABLE_QUESTION = "Question";
+    public static final String TABLE_RANK = "Rank";
 
     public static final String NAME = "name";
     public static final String FIRSTNAME = "firstname";
@@ -17,5 +18,7 @@ public class ParseConstant {
     public static final String WRONG1 = "wrong1";
     public static final String WRONG2 = "wrong2";
     public static final String SCORE = "score";
+    public static final String TIME = "time";
 
+    public static final String GUEST = "guest";
 }

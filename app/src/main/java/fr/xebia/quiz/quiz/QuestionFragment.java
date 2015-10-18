@@ -60,6 +60,7 @@ public class QuestionFragment extends Fragment {
     private int current = 0;
     private String guestId;
     private ValueAnimator animator;
+    private long time;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -167,7 +168,7 @@ public class QuestionFragment extends Fragment {
             }
         }
 
-        results[current] = new QuestionResult(question.getText(), text, question.getCorrect());
+        results[current] = new QuestionResult(question.getText(), text, question.getCorrect(), System.currentTimeMillis() - time);
 
         current++;
 
@@ -203,6 +204,7 @@ public class QuestionFragment extends Fragment {
     }
 
     private void next() {
+        time = System.currentTimeMillis();
         HANDLER.postDelayed(new Runnable() {
             @Override
             public void run() {

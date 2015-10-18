@@ -10,6 +10,7 @@ import static fr.xebia.quiz.model.ParseConstant.NAME;
 import static fr.xebia.quiz.model.ParseConstant.PHONE;
 import static fr.xebia.quiz.model.ParseConstant.POSTCODE;
 import static fr.xebia.quiz.model.ParseConstant.SCORE;
+import static fr.xebia.quiz.model.ParseConstant.TIME;
 import static fr.xebia.quiz.model.ParseConstant.YEAR;
 
 @ParseClassName(ParseConstant.TABLE_GUEST)
@@ -43,8 +44,20 @@ public class Guest extends ParseObject {
         put(JOB, job);
     }
 
-    public void setScore(String score) {
+    public void setScore(int score) {
         put(SCORE, score);
+    }
+
+    public void setTime(long time) {
+        put(TIME, time);
+    }
+
+    public String getName() {
+        return getString(NAME);
+    }
+
+    public String getFirstname() {
+        return getString(FIRSTNAME);
     }
 
 }
