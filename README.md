@@ -8,8 +8,10 @@
 
 Define parse configuration
 
-    PARSE_APPLICATION_ID=
-    PARSE_CLIENT_KEY=
+    quizApplicationId=
+    quizClientKey=
+    quizAdminUsername=
+    quizAdminPassword=
   
 in your **.gradle** file and run application.
 
