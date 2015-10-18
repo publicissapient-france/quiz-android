@@ -3,7 +3,7 @@
 var vendor = [];
 
 var source = [
-    '*.js'
+    'app/*.js'
 ];
 
 module.exports = function (grunt) {
@@ -17,7 +17,7 @@ module.exports = function (grunt) {
             dist: {
                 files: [
                     {
-                        src: ['app.sass'],
+                        src: ['app/app.sass'],
                         dest: '.',
                         expand: true,
                         ext: '.css'
@@ -30,7 +30,7 @@ module.exports = function (grunt) {
         watch: {
 
             sass: {
-                files: '*.sass',
+                files: 'app/*.sass',
                 tasks: ['sass']
             },
 
@@ -40,8 +40,8 @@ module.exports = function (grunt) {
                 },
                 files: [
                     '*.html',
-                    '*.css',
-                    '*.js'
+                    'app/*.css',
+                    'app/*.js'
                 ]
             }
 
@@ -89,7 +89,7 @@ module.exports = function (grunt) {
         cssmin: {
             target: {
                 files: {
-                    'dist/style/app.min.css': ['app.css']
+                    'dist/app/app.css': ['app/app.css']
                 }
             }
         },
@@ -97,7 +97,7 @@ module.exports = function (grunt) {
         uglify: {
             target: {
                 files: {
-                    'dist/app.min.js': source
+                    'dist/app/app.js': source
                 }
             }
         },
@@ -108,7 +108,7 @@ module.exports = function (grunt) {
             },
             target: {
                 src: vendor,
-                dest: 'dist/vendor.min.js'
+                dest: 'dist/app/vendor.min.js'
             }
         },
 
