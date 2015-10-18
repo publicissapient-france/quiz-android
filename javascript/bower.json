@@ -1,0 +1,16 @@
+{
+  "name": "Quiz",
+  "version": "0.0.1",
+  "homepage": "https://github.com/xebia-france/quiz-android",
+  "authors": [
+    "Benjamin Lacroix <blacroix@xebia.fr>"
+  ],
+  "description": "Ranking quiz javascript",
+  "main": "app.js",
+  "keywords": [
+    "quiz",
+    "android",
+    "rank"
+  ],
+  "license": "MIT"
+}
