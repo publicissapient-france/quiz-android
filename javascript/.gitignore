@@ -3,3 +3,6 @@ app.css.map
 node_modules
 .grunt
 dist
+.idea/
+*.iml
+.sass-cache/
