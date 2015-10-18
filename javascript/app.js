@@ -7,6 +7,9 @@ var app = {
     thirdScore: null,
 
     ranks: null,
+
+    query: null,
+
     getTimeInSeconde: function (rank) {
         return parseInt(rank.get('time'), 10) / 1000 + ' sec';
     },
@@ -38,24 +41,31 @@ var app = {
         this.secondScore = document.getElementById('secondScore');
         this.third = document.getElementById('third');
         this.thirdScore = document.getElementById('thirdScore');
+
+        var Rank = Parse.Object.extend("Rank");
+        this.query = new Parse.Query(Rank);
+        this.query.limit(3);
+        this.query.ascending("-score,time");
+    },
+    getRanking: function () {
+        this.query.find({
+            success: function (ranks) {
+                app.ranks = ranks;
+                app.bindRank();
+            },
+            error: function (e) {
+                console.log('Cannot get ranks');
+                console.log(e);
+            }
+        });
     }
 };
 
 window.onload = function () {
-    app.initialize();
     Parse.initialize("FfcLhJ6gRektlXkgfUqKrZlvTztaGlSS2ADOdN9y", "JNdFp4k3LmYFRJEAdSDYGn8lUqE1nNZRSk6PSzQO");
-    var Rank = Parse.Object.extend("Rank");
-    var query = new Parse.Query(Rank);
-    query.limit(3);
-    query.ascending("-score,time");
-    query.find({
-        success: function (ranks) {
-            app.ranks = ranks;
-            app.bindRank();
-        },
-        error: function (e) {
-            console.log('Cannot get ranks');
-            console.log(e);
-        }
-    });
+    app.initialize();
+    app.getRanking();
+    setInterval(function () {
+        app.getRanking();
+    }, 5000);
 };
