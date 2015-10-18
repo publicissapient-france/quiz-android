@@ -44,9 +44,10 @@ public class QuestionFragment extends Fragment {
     public static final int NEXT_DELAY = 1_000;
 
     @Bind(R.id.questionText) TextView questionText;
-    @Bind(R.id.answer0Text) TextView answer0Text;
-    @Bind(R.id.answer1Text) TextView answer1Text;
-    @Bind(R.id.answer2Text) TextView answer2Text;
+
+    @Bind(R.id.answer0Text) Button answer0Button;
+    @Bind(R.id.answer1Text) Button answer1Button;
+    @Bind(R.id.answer2Text) Button answer2Button;
 
     @Bind(R.id.questionCountTextView) TextView questionCountTextView;
     @Bind(R.id.questionCountProgressBar) ProgressBar questionCountProgressBar;
@@ -157,6 +158,7 @@ public class QuestionFragment extends Fragment {
     @OnClick({R.id.answer0Text, R.id.answer1Text, R.id.answer2Text})
     @SuppressWarnings("unused")
     public void onAnswerClick(Button answer) {
+        answerButtonEnable(false);
         animator.pause();
         boolean correct = false;
         final Question question = quizQuestion[current];
@@ -177,6 +179,12 @@ public class QuestionFragment extends Fragment {
         } else {
             wrong();
         }
+    }
+
+    private void answerButtonEnable(boolean enable) {
+        answer0Button.setEnabled(enable);
+        answer1Button.setEnabled(enable);
+        answer2Button.setEnabled(enable);
     }
 
     private void wrong() {
@@ -218,12 +226,14 @@ public class QuestionFragment extends Fragment {
                 answers.add(question.getWrong2());
                 Collections.shuffle(answers);
 
-                answer0Text.setText(answers.get(0));
-                answer1Text.setText(answers.get(1));
-                answer2Text.setText(answers.get(2));
+                answer0Button.setText(answers.get(0));
+                answer1Button.setText(answers.get(1));
+                answer2Button.setText(answers.get(2));
 
                 questionCountTextView.setText(String.format("%d/%d", current + 1, quizQuestion.length));
                 questionCountProgressBar.setProgress(current + 1);
+
+                answerButtonEnable(true);
 
                 animator.start();
             }
